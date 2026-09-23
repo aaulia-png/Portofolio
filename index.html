@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal Portfolio Aulia Azahra Anasya">
+  <title>Aulia — Personal Portfolio</title>
+
+  <style>
+    /* =========================
+       RESET & GLOBAL
+    ========================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #fffaf5;
+      --bg-soft: #f8eee9;
+      --card: #ffffff;
+      --text: #493c38;
+      --text-soft: #806f68;
+      --primary: #c98291;
+      --primary-dark: #a85f70;
+      --accent: #dce5d5;
+      --border: #eadbd4;
+      --shadow: 0 15px 40px rgba(100, 70, 60, 0.10);
+    }
+
+    body.dark {
+      --bg: #211d1c;
+      --bg-soft: #2d2726;
+      --card: #342e2c;
+      --text: #f9eee9;
+      --text-soft: #cbbdb7;
+      --primary: #e49aaa;
+      --primary-dark: #f1b2c0;
+      --accent: #435044;
+      --border: #4a3e3b;
+      --shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 250, 245, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    body.dark header {
+      background: rgba(33, 29, 28, 0.85);
+    }
+
+    nav {
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+
+    .logo span {
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--primary);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .theme-btn,
+    .menu-btn {
+      border: none;
+      background: var(--bg-soft);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "✿";
+      position: absolute;
+      font-size: 180px;
+      color: var(--bg-soft);
+      right: 5%;
+      top: 15%;
+      z-index: -1;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .small-title {
+      color: var(--primary-dark);
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 78px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--primary-dark);
+    }
+
+    .hero p {
+      max-width: 580px;
+      color: var(--text-soft);
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: 1px solid var(--primary);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Profile Card */
+
+    .profile-card {
+      position: relative;
+      width: 300px;
+      margin: auto;
+      transform: rotate(3deg);
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px;
+      padding-bottom: 50px;
+      box-shadow: var(--shadow);
+      border-radius: 3px;
+    }
+
+    .profile-photo {
+      height: 350px;
+      background: linear-gradient(135deg, #f3d8dc, #e7e0d5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      overflow: hidden;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .polaroid-text {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #665550;
+      font-family: cursive;
+    }
+
+    .sticker {
+      position: absolute;
+      background: #f4d77d;
+      padding: 8px 15px;
+      transform: rotate(-12deg);
+      top: -20px;
+      right: -30px;
+      box-shadow: 4px 5px 0 rgba(0,0,0,.08);
+      font-size: 13px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title .mini {
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-top: 8px;
+    }
+
+    .section-title p {
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 10px auto;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .about-card {
+      background: var(--card);
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .about-card h3 {
+      margin-bottom: 15px;
+      color: var(--primary-dark);
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* =========================
+       INTERESTS
+    ========================= */
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .interest-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: var(--shadow);
+    }
+
+    .interest-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .interest-card p {
+      color: var(--text-soft);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* =========================
+       JOURNEY
+    ========================= */
+
+    .timeline {
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 20px 35px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: 30px;
+      right: -7px;
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -7px;
+    }
+
+    .timeline-card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .timeline-card small {
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border-radius: 25px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .project-image {
+      height: 190px;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .project-content {
+      padding: 25px;
+    }
+
+    .project-content h3 {
+      margin-bottom: 8px;
+    }
+
+    .project-content p {
+      color: var(--text-soft);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background: var(--accent);
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 180px;
+      gap: 15px;
+    }
+
+    .gallery-item {
+      background: linear-gradient(135deg, #f1d9dc, #e8e1d7);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      overflow: hidden;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-box {
+      background: var(--bg-soft);
+      border-radius: 35px;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .contact-box p {
+      color: var(--text-soft);
+      margin-bottom: 25px;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .social {
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--card);
+      transition: .3s;
+    }
+
+    .social:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    /* =========================
+       SCROLL ANIMATION
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        position: absolute;
+        top: 75px;
+        right: 5%;
+        background: var(--card);
+        width: 220px;
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero-content,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .interest-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      section {
+        padding: 70px 0;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .interest-grid,
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        width: 250px;
+      }
+
+      .profile-photo {
+        height: 300px;
+      }
+
+      .timeline::before {
+        left: 10px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding-left: 40px;
+      }
+
+      .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 3px;
+        right: auto;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 140px;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-row: span 1;
+      }
+
+      .gallery-item:nth-child(4) {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header>
+    <div class="container">
+      <nav>
+
+        <a href="#home" class="logo">
+          Aulia<span>.</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#journey">Journey</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div style="display:flex; gap:8px;">
+          <button class="theme-btn" id="themeBtn">🌙</button>
+          <button class="menu-btn" id="menuBtn">☰</button>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-content">
+
+        <div class="reveal">
+
+          <div class="small-title">
+            ✦ WELCOME TO MY LITTLE SPACE
+          </div>
+
+          <h1>
+            Hi, I'm <span>Aulia.</span>
+          </h1>
+
+          <p>
+            A high school student who loves learning,
+            creating, exploring new things, and turning
+            little ideas into meaningful experiences.
+          </p>
+
+          <div class="buttons">
+            <a href="#about" class="btn btn-primary">
+              About Me →
+            </a>
+
+            <a href="#projects" class="btn">
+              My Projects
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="profile-card reveal">
+
+          <div class="sticker">
+            ✨ that's me!
+          </div>
+
+          <div class="polaroid">
+
+            <div class="profile-photo">
+              👩🏻
+            </div>
+
+            <div class="polaroid-text">
+              Aulia — 2026
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-title reveal">
+          <div class="mini">GET TO KNOW ME</div>
+          <h2>A Little About Me 🌷</h2>
+          <p>
+            A small introduction about who I am,
+            what I enjoy, and what I'm learning.
+          </p>
+        </div>
+
+
+        <div class="about-grid">
+
+          <div class="about-card reveal">
+
+            <h3>♡ Who am I?</h3>
+
+            <p>
+              Hai! Aku Aulia. Saat ini aku merupakan
+              siswa kelas 10 yang sedang menikmati
+              perjalanan baru di SMA.
+            </p>
+
+            <br>
+
+            <p>
+              Aku suka mencoba hal baru, mengikuti
+              kegiatan, membuat sesuatu, dan belajar
+              dari setiap pengalaman yang aku dapatkan.
+            </p>
+
+          </div>
+
+
+          <div class="about-card reveal">
+
+            <h3>✦ Quick Info</h3>
+
+            <ul class="info-list">
+
+              <li>
+                👩🏻 <strong>Nama:</strong>
+                Aulia Azahra Anasya
+              </li>
+
+              <li>
+                🎓 <strong>Status:</strong>
+                Student
+              </li>
+
+              <li>
+                🏫 <strong>School:</strong>
+                SMAN 19 Bandung
+              </li>
+
+              <li>
+                💃 <strong>Hobby:</strong>
+                Dance
+              </li>
+
+              <li>
+                🍳 <strong>Interest:</strong>
+                Cooking & Business
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INTERESTS
+    ========================== -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-title reveal">
+          <div class="mini">MY INTERESTS</div>
+          <h2>Things I Love ♡</h2>
+        </div>
+
+
+        <div class="interest-grid">
+
+          <div class="interest-card reveal">
+            <div class="interest-icon">💃🏻</div>
+            <h3>Dance</h3>
+            <p>
+              A fun way to express creativity
+              and enjoy the moment.
+            </p>
+          </div>
+
+
+          <div class="interest-card reveal">
+            <div class="interest-icon">🍳</div>
+            <h3>Cooking</h3>
+            <p>
+              Experimenting with recipes
+              and discovering new flavors.
+            </p>
+          </div>
+
+
+          <div class="interest-card reveal">
+            <div class="interest-icon">💡</div>
+            <h3>Business</h3>
+            <p>
+              Exploring ideas and learning
+              how small businesses work.
+            </p>
+          </div>
+
+
+          <div class="interest-card reveal">
+            <div class="interest-icon">🎨</div>
+            <h3>Creativity</h3>
+            <p>
+              Creating simple things
+              that feel meaningful.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         JOURNEY
+    ========================== -->
+
+    <section id="journey">
+
+      <div class="container">
+
+        <div class="section-title reveal">
+          <div class="mini">MY JOURNEY</div>
+          <h2>A Few Chapters of My Story</h2>
+        </div>
+
+
+        <div class="timeline">
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+              <small>2023</small>
+
+              <h3>Elementary School 🎨</h3>
+
+              <p>
+                Started exploring hobbies,
+                creativity, and new experiences.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+              <small>2024 — 2026</small>
+
+              <h3>Junior High School 🏫</h3>
+
+              <p>
+                Experienced school activities,
+                organizations, and different projects.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+              <small>2026</small>
+
+              <h3>A New Chapter 🎓</h3>
+
+              <p>
+                Started a new journey as a
+                high school student.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+              <small>NOW</small>
+
+              <h3>Learning & Growing 🌱</h3>
+
+              <p>
+                Exploring new skills, projects,
+                organizations, and possibilities.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-title reveal">
+
+          <div class="mini">MY WORK</div>
+
+          <h2>Things I've Created ✦</h2>
+
+          <p>
+            Some school projects, ideas,
+            and experiences I've worked on.
+          </p>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              🍱
+            </div>
+
+            <div class="project-content">
+
+              <h3>Food Business</h3>
+
+              <p>
+                Developing ideas for affordable,
+                practical, and delicious food.
+              </p>
+
+              <span class="tag">
+                Entrepreneurship
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              💻
+            </div>
+
+            <div class="project-content">
+
+              <h3>Informatics</h3>
+
+              <p>
+                Learning computational thinking,
+                algorithms, and cybersecurity.
+              </p>
+
+              <span class="tag">
+                Technology
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              🧪
+            </div>
+
+            <div class="project-content">
+
+              <h3>Chemistry Project</h3>
+
+              <p>
+                Exploring ways to understand
+                and prevent environmental pollution.
+              </p>
+
+              <span class="tag">
+                Science
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              🎤
+            </div>
+
+            <div class="project-content">
+
+              <h3>Event Experience</h3>
+
+              <p>
+                Participating in school and
+                community events.
+              </p>
+
+              <span class="tag">
+                Experience
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              📝
+            </div>
+
+            <div class="project-content">
+
+              <h3>School Projects</h3>
+
+              <p>
+                A collection of assignments
+                and creative school projects.
+              </p>
+
+              <span class="tag">
+                Education
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="project-card reveal">
+
+            <div class="project-image">
+              📱
+            </div>
+
+            <div class="project-content">
+
+              <h3>Creative Content</h3>
+
+              <p>
+                Exploring social media,
+                design, writing, and digital creativity.
+              </p>
+
+              <span class="tag">
+                Creative
+              </span>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALLERY
+    ========================== -->
+
+    <section id="gallery">
+
+      <div class="container">
+
+        <div class="section-title reveal">
+
+          <div class="mini">MEMORIES</div>
+
+          <h2>Little Moments 📸</h2>
+
+          <p>
+            Replace these placeholders with
+            your favorite photos.
+          </p>
+
+        </div>
+
+
+        <div class="gallery">
+
+          <div class="gallery-item reveal">
+            📸
+          </div>
+
+          <div class="gallery-item reveal">
+            💃🏻
+          </div>
+
+          <div class="gallery-item reveal">
+            🏫
+          </div>
+
+          <div class="gallery-item reveal">
+            🌷
+          </div>
+
+          <div class="gallery-item reveal">
+            🍳
+          </div>
+
+          <div class="gallery-item reveal">
+            ✨
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-box reveal">
+
+          <h2>Let's Connect! 💌</h2>
+
+          <p>
+            Thanks for visiting my little corner
+            of the internet.
+          </p>
+
+          <a
+            href="mailto:your@email.com"
+            class="btn btn-primary">
+            Say Hello →
+          </a>
+
+
+          <div class="socials">
+
+            <a href="#" class="social">
+              Instagram
+            </a>
+
+            <a href="#" class="social">
+              TikTok
+            </a>
+
+            <a href="#" class="social">
+              GitHub
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <p>
+      Made with ♡ by Aulia
+    </p>
+
+    <p>
+      © <span id="year"></span> Aulia Azahra Anasya
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* =====================
+       MOBILE MENU
+    ===================== */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+
+      navLinks.classList.toggle("active");
+
+    });
+
+
+    /* Close menu after clicking */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+      });
+
+    });
+
+
+    /* =====================
+       DARK MODE
+    ===================== */
+
+    const themeBtn = document.getElementById("themeBtn");
+
+    themeBtn.addEventListener("click", () => {
+
+      document.body.classList.toggle("dark");
+
+      if (document.body.classList.contains("dark")) {
+
+        themeBtn.textContent = "☀️";
+
+        localStorage.setItem("theme", "dark");
+
+      } else {
+
+        themeBtn.textContent = "🌙";
+
+        localStorage.setItem("theme", "light");
+
+      }
+
+    });
+
+
+    /* Remember theme */
+
+    if (localStorage.getItem("theme") === "dark") {
+
+      document.body.classList.add("dark");
+
+      themeBtn.textContent = "☀️";
+
+    }
+
+
+    /* =====================
+       SCROLL REVEAL
+    ===================== */
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+
+      reveals.forEach(element => {
+
+        const windowHeight =
+          window.innerHeight;
+
+        const elementTop =
+          element.getBoundingClientRect().top;
+
+        const visiblePoint = 100;
+
+        if (elementTop < windowHeight - visiblePoint) {
+
+          element.classList.add("active");
+
+        }
+
+      });
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      revealOnScroll
+    );
+
+    revealOnScroll();
+
+
+    /* =====================
+       CURRENT YEAR
+    ===================== */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
